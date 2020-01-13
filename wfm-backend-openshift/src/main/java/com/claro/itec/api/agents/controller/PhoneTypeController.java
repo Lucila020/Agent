@@ -34,7 +34,7 @@ public class PhoneTypeController {
      */
    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PhoneTypeDTO>> retrieveListPhoneTypes() {
-        return new ResponseEntity<>(this.phoneTypeService.getPhoneTypes(), HttpStatus.OK);
+        return new ResponseEntity<>(this.phoneTypeService.retrieveListPhoneTypes(), HttpStatus.OK);
     }
 
 }

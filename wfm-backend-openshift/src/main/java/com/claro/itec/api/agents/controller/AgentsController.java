@@ -36,7 +36,7 @@ public class AgentsController {
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AgentDTO>> retrieveListAgents() throws NoDataFoundException {
-        return new ResponseEntity<>(this.agentService.getAgents(), HttpStatus.OK);
+        return new ResponseEntity<>(this.agentService.retrieveListAgents(), HttpStatus.OK);
     }
 
 
@@ -60,8 +60,7 @@ public class AgentsController {
      */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
      public ResponseEntity<AgentDTO> updateAgent(@RequestBody final AgentDTO agentDTO) throws InvalidRequestException{
-        final AgentDTO resultMapped = this.agentService.updateAgent(agentDTO);
-        return new ResponseEntity<>(resultMapped, HttpStatus.OK);
+        return new ResponseEntity<>(this.agentService.updateAgent(agentDTO), HttpStatus.OK);
     }
 
     /**

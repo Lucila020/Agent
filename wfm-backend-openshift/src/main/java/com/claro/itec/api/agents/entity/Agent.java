@@ -1,10 +1,13 @@
 package com.claro.itec.api.agents.entity;
 
+import com.claro.itec.api.agents.util.ApiConstants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -18,6 +21,7 @@ public class Agent implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "agent_Number",length = 7, nullable = false)
     private Integer agentNumber;
 
@@ -41,6 +45,7 @@ public class Agent implements Serializable {
     private Integer phoneNumber;
 
     @Column(length = 60)
+    @Pattern(regexp = ApiConstants.REGEXP_EMAIL,message = "El email tiene formato invalido")
     private String email;
 
     @Column(length = 20)

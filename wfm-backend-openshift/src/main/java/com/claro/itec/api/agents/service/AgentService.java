@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AgentService {
 
-  public List<AgentDTO> getAgents() throws NoDataFoundException;
+  public List<AgentDTO> retrieveListAgents() throws NoDataFoundException;
 
   public AgentDTO createAgent(final AgentDTO agentDTO) throws InvalidRequestException;
 

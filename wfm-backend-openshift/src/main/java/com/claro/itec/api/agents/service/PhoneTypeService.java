@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PhoneTypeService {
 
-    public List<PhoneTypeDTO> getPhoneTypes();
+    public List<PhoneTypeDTO> retrieveListPhoneTypes();
 }

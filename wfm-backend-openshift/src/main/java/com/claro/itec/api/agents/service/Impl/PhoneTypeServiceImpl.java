@@ -28,7 +28,7 @@ public class PhoneTypeServiceImpl implements PhoneTypeService {
      * @return returns the phone types {@link PhoneTypeDTO}
      */
     @Override
-    public List<PhoneTypeDTO> getPhoneTypes() {
+    public List<PhoneTypeDTO> retrieveListPhoneTypes() {
         final List<PhoneTypeDTO> list =this.phoneTypeRepository.findAll().stream().map(item -> this.phoneTypeConverter.convert(item)).collect(Collectors.toList());
 
         return list;
