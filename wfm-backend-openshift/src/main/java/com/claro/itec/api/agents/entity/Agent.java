@@ -4,6 +4,7 @@ import com.claro.itec.api.agents.util.ApiConstants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -69,9 +70,8 @@ public class Agent implements Serializable {
     @Column(name = "postal_code",length = 20)
     private String postalCode;
 
-    @Column(nullable = false)
-    private String status;
-
+    @Column(name="ENABLE")
+    private boolean enable;
 
     @Column(name = "FECHA_ALTA")
     private LocalDateTime fechaAlta;
@@ -81,5 +81,6 @@ public class Agent implements Serializable {
 
     @Column(name = "FECHA_BAJA")
     private LocalDateTime fechaBaja;
+
 
 }

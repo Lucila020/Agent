@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/phoneType")
+@RequestMapping(value = "/itec/phoneType")
 public class PhoneTypeController {
 
 

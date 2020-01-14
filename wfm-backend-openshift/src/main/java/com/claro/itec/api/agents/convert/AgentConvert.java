@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Component
 public class AgentConvert implements Converter<AgentDTO, Agent> {
 
-
     @Override
     public Agent convert(AgentDTO value) {
         Agent agent  =  new Agent();
@@ -38,7 +37,7 @@ public class AgentConvert implements Converter<AgentDTO, Agent> {
         mapped.setAddressNumber(agentDTO.getAddressNumber());
         mapped.setPostalCode(agentDTO.getPostalCode());
         mapped.setProvince(agentDTO.getProvince());
-        mapped.setStatus("Y");
+        mapped.setEnable(true);
         mapped.setFechaAlta(LocalDateTime.now());
         mapped.setFechaModificacion(LocalDateTime.now());
         return mapped;

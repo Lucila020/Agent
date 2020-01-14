@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface AgentRepository extends JpaRepository<Agent,Long> {
 
-    List<Agent> findByStatus(String status);
+    List<Agent> findByEnable(boolean status);
 
 
 

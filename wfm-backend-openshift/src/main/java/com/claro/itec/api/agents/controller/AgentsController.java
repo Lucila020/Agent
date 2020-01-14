@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(value = "/agent")
+@RequestMapping(value = "/itec/agent")
 public class AgentsController {
 
 
@@ -59,7 +59,7 @@ public class AgentsController {
      * @return returns the {@link AgentDTO} updated
      */
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-     public ResponseEntity<AgentDTO> updateAgent(@RequestBody final AgentDTO agentDTO) throws InvalidRequestException{
+     public ResponseEntity<AgentDTO> updateAgent(@Valid @RequestBody final AgentDTO agentDTO) throws InvalidRequestException{
         return new ResponseEntity<>(this.agentService.updateAgent(agentDTO), HttpStatus.OK);
     }
 
@@ -69,9 +69,9 @@ public class AgentsController {
      * @param agent that are going to be disabled
      * @return returns the Ids of the reason that have been disabled
      */
-   @PutMapping(path = "/disable", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AgentDTO> disableAgent(@RequestBody final AgentDTO agent) {
-       final AgentDTO resultMapped = this.agentService.deleteAgent(agent);
+   @PutMapping(path = "/disable/{agentId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AgentDTO> disableAgent(final @PathVariable("agentId") Long agentId) {
+       final AgentDTO resultMapped = this.agentService.deleteAgent(agentId);
         return new ResponseEntity<>(resultMapped, HttpStatus.OK);
     }
 

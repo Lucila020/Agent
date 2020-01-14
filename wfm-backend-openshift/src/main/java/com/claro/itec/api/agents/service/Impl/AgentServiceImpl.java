@@ -3,7 +3,6 @@ package com.claro.itec.api.agents.service.Impl;
 import com.claro.itec.api.agents.convert.AgentConvert;
 import com.claro.itec.api.agents.convert.AgentDTOConverter;
 import com.claro.itec.api.agents.dto.AgentDTO;
-import com.claro.itec.api.agents.entity.PhoneType;
 import com.claro.itec.api.agents.exception.InvalidRequestException;
 import com.claro.itec.api.agents.exception.NoDataFoundException;
 import com.claro.itec.api.agents.entity.Agent;
@@ -29,12 +28,14 @@ public class AgentServiceImpl implements AgentService {
     private PhoneTypeRepository phoneTypeRepository;
     private AgentConvert agentConvert;
 
+
     @Autowired
     public AgentServiceImpl(AgentRepository agentRepository, AgentDTOConverter agentConverter, PhoneTypeRepository phoneTypeRepository, AgentConvert agentConvert) {
         this.agentRepository = agentRepository;
         this.agentConverter = agentConverter;
         this.phoneTypeRepository = phoneTypeRepository;
         this.agentConvert = agentConvert;
+
     }
 
     /**
@@ -44,7 +45,7 @@ public class AgentServiceImpl implements AgentService {
      */
     @Override
     public List<AgentDTO> retrieveListAgents() throws NoDataFoundException {
-        List<Agent> list = this.agentRepository.findByStatus("Y");
+        List<Agent> list = this.agentRepository.findByEnable(true);
         if (list.isEmpty()) {
             throw new NoDataFoundException("No agents founds");
         }
@@ -106,11 +107,11 @@ public class AgentServiceImpl implements AgentService {
     }
 
 
-    public AgentDTO updateStatusAgent(final AgentDTO agentDTO, final String enable) {
-        final Agent agentSto = this.agentRepository.findById(agentDTO.getId()).get();
-        agentSto.setStatus(enable);
+    public AgentDTO updateStatusAgent(final Agent agentSto, final Boolean enable) {
+
+        agentSto.setEnable(enable);
         agentSto.setFechaModificacion(LocalDateTime.now());
-        if (enable.equals("N")) {
+        if (enable) {
 
             agentSto.setFechaBaja(LocalDateTime.now());
         }
@@ -125,15 +126,15 @@ public class AgentServiceImpl implements AgentService {
         return resultMapped;
     }
 
-    public AgentDTO deleteAgent(final AgentDTO agentDTO) {
-
-        return this.updateStatusAgent(agentDTO, "N");
+    public AgentDTO deleteAgent(final Long agentID) {
+        final Agent agentSto = this.agentRepository.findById(agentID).get();
+        return this.updateStatusAgent(agentSto, false);
 
     }
 
     private void verifyValidateRequestData(final AgentDTO agentDTO) throws  InvalidRequestException{
 
-        if (agentDTO.getAgentNumber() == 0) {
+              if (agentDTO.getAgentNumber() == 0) {
             LOGGER.error("El Número de Agente no puede ser vacío");
             throw new InvalidRequestException("El Número de Agente no puede ser vacío");
         }
