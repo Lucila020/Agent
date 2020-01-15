@@ -111,7 +111,7 @@ public class AgentServiceImpl implements AgentService {
 
         agentSto.setEnable(enable);
         agentSto.setFechaModificacion(LocalDateTime.now());
-        if (enable) {
+        if (!enable) {
 
             agentSto.setFechaBaja(LocalDateTime.now());
         }
