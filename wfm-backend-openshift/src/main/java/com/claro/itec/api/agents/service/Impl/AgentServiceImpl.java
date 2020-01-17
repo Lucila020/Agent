@@ -134,7 +134,7 @@ public class AgentServiceImpl implements AgentService {
 
     private void verifyValidateRequestData(final AgentDTO agentDTO) throws  InvalidRequestException{
 
-              if (agentDTO.getAgentNumber() == 0) {
+        if (agentDTO.getAgentNumber() == 0) {
             LOGGER.error("El Número de Agente no puede ser vacío");
             throw new InvalidRequestException("El Número de Agente no puede ser vacío");
         }
@@ -142,10 +142,31 @@ public class AgentServiceImpl implements AgentService {
             LOGGER.error("La Razón Social no puede ser vacia");
             throw new InvalidRequestException("La Razón Social no puede ser vacia");
         }
+        if (!agentDTO.getBusinessName().matches("^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)")) {
+            LOGGER.error("La Razón Social  tiene formato invalido");
+            throw new InvalidRequestException("La Razón Social tiene formato invalido");
+        }
 
-        if ((agentDTO.getPhoneNumber().toString() + agentDTO.getCharacteristic().toString()).length() > 10) {
-            LOGGER.error("La longitd de la caracteristica y  número debería ser menor a 10");
-            throw new InvalidRequestException("La longitd de la caracteristica y  número debería ser menor a 10");
+        if(agentDTO.getName() != null){
+            if(!agentDTO.getName().matches("[A-Z][a-zA-Z][^#&<>\"~;$^%{}?]{1,20}$")){
+                LOGGER.error("El nombre tiene formato invalido" );
+                throw new InvalidRequestException("El nombre tiene formato invalido");
+            }
+        }
+
+        if(agentDTO.getSurname() != null){
+            String rex = "^[^\\d!¡@#$`°%^&~*(),;.¬¿?´\":{}/|<>+_\"¨\\\\=-]*$";
+            if(!agentDTO.getSurname().matches(rex)){
+                LOGGER.error("El apellido tiene formato invalido " + agentDTO.getSurname());
+                throw new InvalidRequestException("El apellido tiene formato invalido");
+           }
+        }
+
+        if (agentDTO.getPhoneNumber().toString() != null && agentDTO.getCharacteristic().toString() != null) {
+          if ((agentDTO.getPhoneNumber().toString() + agentDTO.getCharacteristic().toString()).length() > 10) {
+              LOGGER.error("La longitd de la caracteristica y  número debería ser menor a 10");
+              throw new InvalidRequestException("La longitd de la caracteristica y  número debería ser menor a 10");
+        }
         }
         if(!agentDTO.getEmail().matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9][a-zA-Z0-9._-]+\\.)+[a-zA-Z]{2,6}$")){
             LOGGER.error("El email tiene formato invalido");
