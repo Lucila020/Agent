@@ -63,17 +63,19 @@ public class AgentsController {
         return new ResponseEntity<>(this.agentService.updateAgent(agentDTO), HttpStatus.OK);
     }
 
+
     /**
      * Disable the agent
      *
      * @param agent that are going to be disabled
      * @return returns the Ids of the reason that have been disabled
      */
-   @PutMapping(value = "/disable/{agentId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+   @PutMapping(value = "/disable/{agentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AgentDTO> disableAgent(final @PathVariable("agentId") Long agentId) {
        final AgentDTO resultMapped = this.agentService.deleteAgent(agentId);
         return new ResponseEntity<>(resultMapped, HttpStatus.OK);
     }
+
 
 
 }
