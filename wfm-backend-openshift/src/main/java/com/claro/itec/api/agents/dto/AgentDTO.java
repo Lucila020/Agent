@@ -21,6 +21,7 @@ public class AgentDTO {
     @NotNull
     private String businessName;
     private String name;
+    private String lastname;
     private String surname;
     @NotNull
     private String phoneType;

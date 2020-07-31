@@ -10,6 +10,6 @@ public interface AgentRepository extends JpaRepository<Agent,Long> {
 
     List<Agent> findByEnable(boolean status);
 
-
+    List<Agent> findByLastname(String lastname);
 
 }
