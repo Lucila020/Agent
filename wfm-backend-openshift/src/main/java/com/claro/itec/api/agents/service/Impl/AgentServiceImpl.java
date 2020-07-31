@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 public class AgentServiceImpl implements AgentService {
 
@@ -79,15 +80,6 @@ public class AgentServiceImpl implements AgentService {
 
     }
 
-    /**
-     * public AgentDTO getAgentById(final Long agentId){
-     * <p>
-     * final AgentSTO agentsto = this.agentRepository.findById(agentId).get();
-     * final AgentDTO agentDTO = agentConverter.convert(agentsto);
-     * return agentDTO;
-     * <p>
-     * }
-     **/
     public AgentDTO updateAgent(final AgentDTO agentDTO) throws InvalidRequestException {
 
         Agent agentSto = this.agentRepository.findById(agentDTO.getId()).get();
