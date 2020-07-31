@@ -106,6 +106,11 @@ public class AgentServiceImpl implements AgentService {
         return resultMapped;
     }
 
+    public AgentDTO deleteOtro(final Long agentID) {
+        final Agent agentSto = this.agentRepository.findById(agentID).get();
+        return this.updateStatusAgent(agentSto, false);
+
+    }
 
     public AgentDTO updateStatusAgent(final Agent agentSto, final Boolean enable) {
 
@@ -172,6 +177,18 @@ public class AgentServiceImpl implements AgentService {
             LOGGER.error("El email tiene formato invalido");
             throw new InvalidRequestException("El email tiene formato invalido");
         }
+
+    }
+
+    public AgentDTO deleteAgentPrueba(final Long agentID) {
+        final Agent agentSto = this.agentRepository.findById(agentID).get();
+        return this.updateStatusAgent(agentSto, false);
+
+    }
+
+    public AgentDTO deleteAgentLogico(final Long agentID) {
+        final Agent agentSto = this.agentRepository.findById(agentID).get();
+        return this.updateStatusAgent(agentSto, false);
 
     }
 
