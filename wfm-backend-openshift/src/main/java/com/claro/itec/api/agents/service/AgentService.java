@@ -15,7 +15,5 @@ public interface AgentService {
 
   public AgentDTO updateAgent(final AgentDTO agentDTO) throws InvalidRequestException;
 
- // public AgentDTO updateStatusAgent(final AgentDTO agentDTO, final Boolean enable);
-
   public AgentDTO deleteAgent(final  Long agentId);
 }
